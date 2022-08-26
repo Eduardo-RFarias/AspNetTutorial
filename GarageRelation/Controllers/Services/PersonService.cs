@@ -7,7 +7,7 @@ namespace GarageRelation.Controllers.Services
     public interface IPersonService
     {
         Task DeletePersonAsync(Person personToDelete);
-        Task<IList<Person>> GetAllPersonsAsync();
+        Task<IQueryable<Person>> GetAllPersonsAsync();
         Task<Person?> GetPersonByIdAsync(int id);
         Task<Person> SavePersonAsync(Person personToSave);
         Task UpdatePersonAsync(Person personToUpdate);
@@ -22,11 +22,9 @@ namespace GarageRelation.Controllers.Services
             this.repository = repository;
         }
 
-        public async Task<IList<Person>> GetAllPersonsAsync()
+        public async Task<IQueryable<Person>> GetAllPersonsAsync()
         {
-            var people = await repository.Person.ToListAsync();
-
-            return people;
+            return await Task.FromResult(repository.Person);
         }
 
         public async Task<Person?> GetPersonByIdAsync(int id)

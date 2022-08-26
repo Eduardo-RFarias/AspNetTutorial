@@ -43,7 +43,6 @@ namespace GarageRelation.Migrations
                         .HasColumnType("varchar(8)");
 
                     b.Property<int>("Year")
-                        .HasMaxLength(10)
                         .HasColumnType("int");
 
                     b.HasKey("Id");

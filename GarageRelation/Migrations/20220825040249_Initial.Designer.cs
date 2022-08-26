@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GarageRelation.Migrations
 {
     [DbContext(typeof(MySqlRepository))]
-    [Migration("20220824014400_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20220825040249_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,7 +45,6 @@ namespace GarageRelation.Migrations
                         .HasColumnType("varchar(8)");
 
                     b.Property<int>("Year")
-                        .HasMaxLength(10)
                         .HasColumnType("int");
 
                     b.HasKey("Id");

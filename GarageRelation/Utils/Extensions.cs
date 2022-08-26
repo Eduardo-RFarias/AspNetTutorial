@@ -1,5 +1,6 @@
 ﻿using GarageRelation.Dtos;
 using GarageRelation.Models;
+using GarageRelation.Models.Dtos.GarageRelation.Dtos;
 
 namespace GarageRelation.Utils
 {
@@ -15,6 +16,19 @@ namespace GarageRelation.Utils
                 MainAddress = person.MainAddress,
                 Number = person.Number,
                 Complement = person.Complement
+            };
+        }
+
+        public static CarResponseDto AsDto(this Car car)
+        {
+            return new()
+            {
+                Id = car.Id,
+                Plate = car.Plate,
+                Brand = car.Brand,
+                Model = car.Model,
+                Year = car.Year,
+                PersonId = car.PersonId
             };
         }
     }

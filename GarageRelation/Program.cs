@@ -1,46 +1,74 @@
 using GarageRelation.Configuration;
 using GarageRelation.Controllers.Repositories;
 using GarageRelation.Controllers.Services;
-using GarageRelation.Utils.HealthChecks;
+using GarageRelation.Utils;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
 
-WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+// ############# WebApplication configuration before building. ###############
+var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Get the database configuration Object
+var mySqlConfiguration = builder.Configuration.GetSection("MySqlSettings").Get<MySqlConfiguration>();
+
+// ############# Add services to the container. ###############
+
+// Add the DB Context using Mysql 8
 builder.Services.AddDbContext<MySqlRepository>(options =>
 {
-    MySqlConfiguration config = builder.Configuration.GetSection("MySqlSettings").Get<MySqlConfiguration>();
-    ServerVersion serverVersion = new MySqlServerVersion(new Version(8, 0));
-
-    options.UseMySql(config.ConnectionString, serverVersion);
+    var serverVersion = new MySqlServerVersion(new Version(8, 0));
+    options.UseMySql(mySqlConfiguration.ConnectionString, serverVersion);
 });
 
+// Add common service dependencies
 builder.Services.AddScoped<IPersonService, PersonService>();
+builder.Services.AddScoped<ICarService, CarService>();
 
+// Add controllers
 builder.Services.AddControllers(config =>
 {
     config.SuppressAsyncSuffixInActionNames = false;
 });
+
+// Add the swagger services
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddHealthChecks().AddCheck<DatabaseHealthCheck>("Database Health Check");
 
+// Add the healthChecks
+builder.Services.AddHealthChecks().AddDbContextCheck<MySqlRepository>(tags: new[] { "ready" });
+
+// ############# Build the WebApplication #############
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// ############# Configure the HTTP request pipeline. AKA WebApplication config after building #############
+
+// Add swaggerUi only in development mode
+// HTTPS redirection is automatic in production environment
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseHttpsRedirection();
 }
-
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+// Use the controllers Route
 app.MapControllers();
 
-app.MapHealthChecks("/health");
+// Use the ready health check route with custom response
+app.MapHealthChecks("/health/ready", new HealthCheckOptions
+{
+    Predicate = (check) => check.Tags.Contains("ready"),
+    ResponseWriter = Utilities.GenerateHealthCheckCustomResponse
+});
 
+// Use the live health check route with no custom health checks (only checks if the server gives a response)
+app.MapHealthChecks("/health/live", new HealthCheckOptions
+{
+    Predicate = (_) => false
+});
+
+// ############# Runs the app ###############
 app.Run();
