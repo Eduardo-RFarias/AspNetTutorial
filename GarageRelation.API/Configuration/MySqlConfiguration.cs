@@ -1,4 +1,4 @@
-﻿namespace GarageRelation.Configuration
+﻿namespace GarageRelation.API.Configuration
 {
     public class MySqlConfiguration
     {

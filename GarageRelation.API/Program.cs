@@ -1,7 +1,7 @@
-using GarageRelation.Configuration;
-using GarageRelation.Controllers.Repositories;
-using GarageRelation.Controllers.Services;
-using GarageRelation.Utils;
+using GarageRelation.API.Configuration;
+using GarageRelation.API.Controllers.Repositories;
+using GarageRelation.API.Controllers.Services;
+using GarageRelation.API.Utils;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
 

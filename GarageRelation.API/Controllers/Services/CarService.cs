@@ -1,8 +1,8 @@
-﻿using GarageRelation.Controllers.Repositories;
-using GarageRelation.Models;
+﻿using GarageRelation.API.Controllers.Repositories;
+using GarageRelation.API.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace GarageRelation.Controllers.Services
+namespace GarageRelation.API.Controllers.Services
 {
     public interface ICarService
     {

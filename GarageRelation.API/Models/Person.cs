@@ -1,4 +1,4 @@
-namespace GarageRelation.Models
+namespace GarageRelation.API.Models
 {
     public class Person
     {

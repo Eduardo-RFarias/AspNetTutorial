@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace GarageRelation.Dtos
+namespace GarageRelation.API.Models.Dtos
 {
     public record PersonCreateDto
     {

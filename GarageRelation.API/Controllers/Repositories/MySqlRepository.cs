@@ -1,8 +1,8 @@
-﻿using GarageRelation.Configuration;
-using GarageRelation.Models;
+﻿using GarageRelation.API.Configuration;
+using GarageRelation.API.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace GarageRelation.Controllers.Repositories
+namespace GarageRelation.API.Controllers.Repositories
 {
     public sealed class MySqlRepository : DbContext
     {

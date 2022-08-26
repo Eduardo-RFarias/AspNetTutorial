@@ -1,9 +1,9 @@
-﻿using GarageRelation.Controllers.Services;
-using GarageRelation.Models.Dtos.GarageRelation.Dtos;
-using GarageRelation.Utils;
+﻿using GarageRelation.API.Controllers.Services;
+using GarageRelation.API.Models.Dtos;
+using GarageRelation.API.Utils;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GarageRelation.Controllers
+namespace GarageRelation.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -11,11 +11,13 @@ namespace GarageRelation.Controllers
     {
         private readonly ICarService carService;
         private readonly IPersonService personService;
+        private readonly ILogger logger;
 
-        public CarController(ICarService carService, IPersonService personService)
+        public CarController(ICarService carService, IPersonService personService, ILogger logger)
         {
             this.carService = carService;
             this.personService = personService;
+            this.logger = logger;
         }
 
         [HttpGet]

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace GarageRelation.Migrations
+namespace GarageRelation.API.Migrations
 {
     public partial class Initial : Migration
     {

@@ -2,7 +2,7 @@
 using System.Net.Mime;
 using System.Text.Json;
 
-namespace GarageRelation.Utils
+namespace GarageRelation.API.Utils
 {
     public static class Utilities
     {

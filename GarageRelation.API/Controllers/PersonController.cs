@@ -1,19 +1,21 @@
-using GarageRelation.Controllers.Services;
-using GarageRelation.Dtos;
-using GarageRelation.Utils;
+using GarageRelation.API.Controllers.Services;
+using GarageRelation.API.Models.Dtos;
+using GarageRelation.API.Utils;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GarageRelation.Controllers
+namespace GarageRelation.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
     public sealed class PersonController : ControllerBase
     {
         private readonly IPersonService personService;
+        private readonly ILogger logger;
 
-        public PersonController(IPersonService personService)
+        public PersonController(IPersonService personService, ILogger logger)
         {
             this.personService = personService;
+            this.logger = logger;
         }
 
         [HttpGet]

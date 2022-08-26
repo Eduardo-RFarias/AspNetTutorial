@@ -1,8 +1,7 @@
-﻿using GarageRelation.Dtos;
-using GarageRelation.Models;
-using GarageRelation.Models.Dtos.GarageRelation.Dtos;
+﻿using GarageRelation.API.Models;
+using GarageRelation.API.Models.Dtos;
 
-namespace GarageRelation.Utils
+namespace GarageRelation.API.Utils
 {
     public static class Extensions
     {

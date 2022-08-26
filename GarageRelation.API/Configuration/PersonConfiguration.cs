@@ -1,8 +1,8 @@
-﻿using GarageRelation.Models;
+﻿using GarageRelation.API.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace GarageRelation.Configuration
+namespace GarageRelation.API.Configuration
 {
     public class PersonConfiguration : IEntityTypeConfiguration<Person>
     {
