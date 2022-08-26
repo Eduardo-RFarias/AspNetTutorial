@@ -2,94 +2,94 @@
 
 namespace GarageRelation.API.Models.Dtos
 {
-    public record PersonCreateDto
-    {
-        [Required]
-        [MaxLength(40)]
-        [MinLength(4)]
-        public string Name { get; init; } = default!;
+	public record PersonCreateDto
+	(
+		[Required]
+		[MaxLength(40)]
+		[MinLength(4)]
+		string Name,
 
-        [Required]
-        [Range(0, 255)]
-        public int Age { get; init; } = default!;
+		[Required]
+		[Range(0, 255)]
+		int Age,
 
-        [Required]
-        [MaxLength(40)]
-        public string MainAddress { get; set; } = default!;
+		[Required]
+		[MaxLength(40)]
+		string MainAddress,
 
-        [Required]
-        [MaxLength(10)]
-        public string Number { get; set; } = default!;
+		[Required]
+		[MaxLength(10)]
+		string Number,
 
-        [MaxLength(255)]
-        public string? Complement { get; set; }
-    }
+		[MaxLength(255)]
+		string? Complement = null
+	);
 
-    public record PersonUpdateDto
-    {
-        [Required]
-        [MaxLength(40)]
-        [MinLength(4)]
-        public string Name { get; init; } = default!;
+	public record PersonUpdateDto
+	(
+		[Required]
+		[MaxLength(40)]
+		[MinLength(4)]
+		string Name,
 
-        [Required]
-        [Range(0, 255)]
-        public int Age { get; init; } = default!;
+		[Required]
+		[Range(0, 255)]
+		int Age,
 
-        [Required]
-        [MaxLength(40)]
-        public string MainAddress { get; set; } = default!;
+		[Required]
+		[MaxLength(40)]
+		string MainAddress,
 
-        [Required]
-        [MaxLength(10)]
-        public string Number { get; set; } = default!;
+		[Required]
+		[MaxLength(10)]
+		string Number,
 
-        [MaxLength(255)]
-        public string? Complement { get; set; }
-    }
+		[MaxLength(255)]
+		string? Complement = null
+	);
 
-    public record PersonPartialUpdateDto
-    {
-        [MaxLength(40)]
-        [MinLength(4)]
-        public string? Name { get; init; }
+	public record PersonPartialUpdateDto
+	(
+		[MaxLength(40)]
+		[MinLength(4)]
+		string? Name = null,
 
-        [Range(0, 255)]
-        public int? Age { get; init; }
+		[Range(0, 255)]
+		int? Age = null,
 
-        [MaxLength(40)]
-        public string? MainAddress { get; set; }
+		[MaxLength(40)]
+		string? MainAddress = null,
 
-        [MaxLength(10)]
-        public string? Number { get; set; }
+		[MaxLength(10)]
+		string? Number = null,
 
-        [MaxLength(255)]
-        public string? Complement { get; set; }
-    }
+		[MaxLength(255)]
+		string? Complement = null
+	);
 
-    public record PersonResponseDto
-    {
-        [Required]
-        public int Id { get; set; } = default!;
+	public record PersonResponseDto
+	(
+		[Required]
+		int Id,
 
-        [Required]
-        [MaxLength(40)]
-        [MinLength(4)]
-        public string Name { get; init; } = default!;
+		[Required]
+		[MaxLength(40)]
+		[MinLength(4)]
+		string Name,
 
-        [Required]
-        [Range(0, 255)]
-        public int Age { get; init; } = default!;
+		[Required]
+		[Range(0, 255)]
+		int Age,
 
-        [Required]
-        [MaxLength(40)]
-        public string MainAddress { get; set; } = default!;
+		[Required]
+		[MaxLength(40)]
+		string MainAddress,
 
-        [Required]
-        [MaxLength(10)]
-        public string Number { get; set; } = default!;
+		[Required]
+		[MaxLength(10)]
+		string Number,
 
-        [MaxLength(255)]
-        public string? Complement { get; set; } = default!;
-    }
+		[MaxLength(255)]
+		string? Complement = null
+	);
 }

@@ -6,18 +6,18 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
 
 // ############# WebApplication configuration before building. ###############
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Get the database configuration Object
-var mySqlConfiguration = builder.Configuration.GetSection("MySqlSettings").Get<MySqlConfiguration>();
+MySqlConfiguration mySqlConfiguration = builder.Configuration.GetSection("MySqlSettings").Get<MySqlConfiguration>();
 
 // ############# Add services to the container. ###############
 
 // Add the DB Context using Mysql 8
 builder.Services.AddDbContext<MySqlRepository>(options =>
 {
-    var serverVersion = new MySqlServerVersion(new Version(8, 0));
-    options.UseMySql(mySqlConfiguration.ConnectionString, serverVersion);
+	MySqlServerVersion serverVersion = new MySqlServerVersion(new Version(8, 0));
+	options.UseMySql(mySqlConfiguration.ConnectionString, serverVersion);
 });
 
 // Add common service dependencies
@@ -27,7 +27,7 @@ builder.Services.AddScoped<ICarService, CarService>();
 // Add controllers
 builder.Services.AddControllers(config =>
 {
-    config.SuppressAsyncSuffixInActionNames = false;
+	config.SuppressAsyncSuffixInActionNames = false;
 });
 
 // Add the swagger services
@@ -39,7 +39,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddHealthChecks().AddDbContextCheck<MySqlRepository>(tags: new[] { "ready" });
 
 // ############# Build the WebApplication #############
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 // ############# Configure the HTTP request pipeline. AKA WebApplication config after building #############
 
@@ -47,9 +47,9 @@ var app = builder.Build();
 // HTTPS redirection is automatic in production environment
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-    app.UseHttpsRedirection();
+	app.UseSwagger();
+	app.UseSwaggerUI();
+	app.UseHttpsRedirection();
 }
 
 app.UseAuthorization();
@@ -60,14 +60,14 @@ app.MapControllers();
 // Use the ready health check route with custom response
 app.MapHealthChecks("/health/ready", new HealthCheckOptions
 {
-    Predicate = (check) => check.Tags.Contains("ready"),
-    ResponseWriter = Utilities.GenerateHealthCheckCustomResponse
+	Predicate = (check) => check.Tags.Contains("ready"),
+	ResponseWriter = Utilities.GenerateHealthCheckCustomResponse
 });
 
 // Use the live health check route with no custom health checks (only checks if the server gives a response)
 app.MapHealthChecks("/health/live", new HealthCheckOptions
 {
-    Predicate = (_) => false
+	Predicate = (_) => false
 });
 
 // ############# Runs the app ###############
